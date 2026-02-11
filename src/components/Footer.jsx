@@ -62,7 +62,7 @@ const Footer = () => {
             >
               <Link href="index.html" className="flex items-center mb-6">
                 <span className="text-3xl md:text-4xl  font-bold tracking-wide">
-                  CLI-X
+                  PENTECH
                 </span>
               </Link>
               <p className="text-sm ">
@@ -179,7 +179,7 @@ const Footer = () => {
               <span>All Rights Reserved</span>
             </p>
             <div className="text-sm mt-1">
-              Designed by <Link to="#">CLI-X</Link>
+              Designed by <Link to="#">PENTECH</Link>
             </div>
           </motion.div>
         </motion.div>

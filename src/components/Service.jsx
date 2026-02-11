@@ -128,7 +128,7 @@ const Services = () => {
       <div className="w-full px-6 md:px-0 md:w-[90%] 2xl:w-[70%] mx-auto text-[#ffffff]">
          <div className="flex flex-col gap-3 items-center text-center mb-10 md:mb-20 2xl:w-[70%] mx-auto">
           <h1 className="text-[36px] md:text-[40px]">Our Services</h1>
-          <p className="text-sm md:text-[16px]">At Cli-X, we provide a full spectrum of digital solutions designed to accelerate your growth and streamline your operations. From design to deployment, we build experiences that are fast, functional, and future-ready.</p>
+          <p className="text-sm md:text-[16px]">At PENTECH, we provide a full spectrum of digital solutions designed to accelerate your growth and streamline your operations. From design to deployment, we build experiences that are fast, functional, and future-ready.</p>
          </div>
         <div
           ref={containerRef}
@@ -233,14 +233,14 @@ const Services = () => {
               className="lg:pl-8"
             >
               <p className="italic text-white mb-4">
-                Welcome to Cli-X — where innovation powers progress. As a
+                Welcome to PENTECH — where innovation powers progress. As a
                 premier digital software house, we specialize in crafting
                 cutting-edge solutions that elevate businesses into the future.
                 From sleek websites to powerful applications, our goal is
                 simple: turn your digital vision into reality.
               </p>
               <p className="text-white">
-                At Cli-X, our mission is to transform technology into impact. We
+                At PENTECH, our mission is to transform technology into impact. We
                 don't just build software — we solve problems. Every project we
                 undertake is guided by creativity, strategic thinking, and a
                 relentless pursuit of excellence. Whether you're a startup or a
