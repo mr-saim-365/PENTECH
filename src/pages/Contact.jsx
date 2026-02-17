@@ -1,218 +1,278 @@
-'use client';
-import React from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import emailjs from '@emailjs/browser';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { BsGeoAlt, BsTelephone, BsEnvelope, BsClock } from 'react-icons/bs';
+"use client";
+import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
+import { useState } from "react";
+import { BsGeoAlt, BsTelephone, BsEnvelope, BsClock } from "react-icons/bs";
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+
+import { FaArrowRight } from "react-icons/fa";
+import bgcontact from "/images/bgcontact.jpg";
 
 // Lazy load Navbar and Footer to reduce initial load
 // const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false });
 // const Footer = dynamic(() => import("../components/Footer"), { ssr: false });
 
-
 const fadeInVariants = {
   hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const Contact = () => {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [message, setMessage] = useState('');
-  const [cellNumber, setCellNumber] = useState('');
-  const [status, setStatus] = useState('');
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [message, setMessage] = useState("");
+  const [cellNumber, setCellNumber] = useState("");
+  const [status, setStatus] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!firstName || !lastName || !email || !cellNumber || !message) {
-      setStatus('error');
+      setStatus("error");
       return;
     }
 
-    const serviceId = 'service_rmw1h2s';
-    const templateId = 'template_ff2x5wo';
-    const publicKey = '1T9xbZKxb37vbLUVd';
+    const serviceId = "service_rmw1h2s";
+    const templateId = "template_ff2x5wo";
+    const publicKey = "1T9xbZKxb37vbLUVd";
 
     const templateParams = {
       from_firstName: firstName,
       from_lastName: lastName,
       from_email: email,
       from_phone: cellNumber,
-  
+
       message,
     };
 
     try {
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
-      setStatus('success');
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setMessage('');
-      setCellNumber('');
+      setStatus("success");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setMessage("");
+      setCellNumber("");
     } catch (error) {
-      console.error('Email sending error:', error);
-      setStatus('emailError');
+      console.error("Email sending error:", error);
+      setStatus("emailError");
     }
   };
 
   return (
     <>
-      <section className=" px-4 md:px-0 bg-[linear-gradient(to_top_right,_#0b121e_80%,_#2f3a4d_100%)]">
-        <Navbar />
+      <Navbar />
+   <section className="overflow-hidden">
 
-        <div className="pt-12 pb-32">
+
+  <div className="pt-12  text-[#222222]">
+
+    {/* Title */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.8 }}
+      className="mx-auto text-center mb-12"
+    >
+      <h2 className="text-xl sm:text-3xl lg:text-5xl 2xl:text-6xl font-bold mb-4">
+        Contact Us
+      </h2>
+      <p className="text-sm sm:text-base">
+        Reach out today and let's start shaping your success together.
+      </p>
+    </motion.div>
+
+    {/* Top section */}
+    <div className="w-full md:w-[95%] px-4 md:px-0  2xl:w-[85%] lg:justify-between mx-auto 
+    flex flex-col lg:flex-row gap-12 py-16 lg:py-[100px]">
+
+      {/* Left text */}
+      <motion.div
+        initial={{ opacity: 0, x: -40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7 }}
+        className="flex flex-col  gap-4"
+      >
+        <p className="text-base sm:text-lg font-semibold">Got A Question?</p>
+
+        <h1 className="uppercase 
+        text-3xl sm:text-5xl md:text-6xl 2xl:text-[72px] 
+        font-semibold leading-[1]">
+          Get in touch
+          <br />
+          with us
+        </h1>
+      </motion.div>
+
+      {/* Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-12 2xl:gap-20">
+
+        {[{
+          icon: <FaPhoneAlt size={20} />,
+          title: "Call Us",
+          desc: "Give us a call – always happy to talk digital!",
+          link: "tel:+12623318793",
+          text: "+1 (262) 331-8793"
+        },
+        {
+          icon: <FaEnvelope size={20} />,
+          title: "Email Us",
+          desc: "Drop us a note – we’ll get back quickly!",
+          link: "mailto:hello@email.com",
+          text: "hello@email.com"
+        },
+        {
+          icon: <FaMapMarkerAlt size={20} />,
+          title: "Visit Us",
+          desc: "Come meet us in person anytime!",
+          link: "#",
+          text: "View Location"
+        }].map((card, i) => (
+
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={fadeInVariants}
-            className="mx-auto text-center mb-12"
+            key={i}
+            whileHover={{ y: -10 }}
+            className="flex flex-col p-6 sm:p-[30px] 
+            bg-white/60 backdrop-blur-md 
+            rounded-2xl shadow-lg 
+            transition duration-300"
           >
-            <h2 className="text-3xl text-white font-bold mb-4">Contact Us</h2>
-            <p className="text-white/60">
-              Reach out today and let's start shaping your success together.
+            <div className="mb-6">{card.icon}</div>
+
+            <h1 className="uppercase text-2xl sm:text-3xl font-semibold">
+              {card.title}
+            </h1>
+
+            <p className="my-6 text-sm sm:text-base">
+              {card.desc}
             </p>
+
+            <a
+              href={card.link}
+              className="inline-flex items-center gap-2 w-max 
+              bg-[#ef476f] hover:scale-105
+              text-white font-semibold px-6 py-3 rounded-full
+              transition duration-300"
+            >
+              <span className="flex items-center justify-center w-6 h-6 bg-white/20 rounded-full">
+                <FaArrowRight className="text-xs" />
+              </span>
+              {card.text}
+            </a>
           </motion.div>
+        ))}
+      </div>
+    </div>
 
-          <div className="w-full md:w-[95%] 2xl:w-[85%] mx-auto flex lg:flex-row items-center flex-col gap-8">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInVariants}
-              className="flex flex-col bg-[#222222] text-white rounded-lg text-sm p-5 space-y-6 lg:w-[40%] 2xl:w-[30%] w-full"
-            >
-              {[
-                {
-                  icon: <BsGeoAlt size={20} />,
-                  title: 'Address',
-                  desc: 'Industrial Area, North Karachi, Pakistan',
-                },
-                {
-                  icon: <BsTelephone size={20} />,
-                  title: 'Call Us',
-                  desc: '0321-2427626',
-                },
-                {
-                  icon: <BsEnvelope size={20} />,
-                  title: 'Email Us',
-                  desc: 'infoclix@gmail.com',
-                },
-                {
-                  icon: <BsClock size={20} />,
-                  title: 'Open Hours',
-                  desc: '24 hrs',
-                },
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-center space-x-4 bg-white/10 p-5 rounded-md"
-                >
-                  <div className="rounded-full bg-white/20 w-12 h-12 flex items-center justify-center">
-                    {item.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
-                    <p>{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
+    {/* Bottom section */}
+    <motion.div
+      style={{ backgroundImage: `url(${bgcontact})` }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1 }}
+      className="bg-cover bg-center"
+    >
+      <div className="py-16 px-4 md:px-0  lg:py-[100px] 
+      flex flex-col lg:flex-row lg:justify-between gap-12 
+      2xl:w-[85%] w-full md:w-[95%] mx-auto">
 
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeInVariants}
-              className="lg:w-[60%] 2xl:w-[70%] w-full"
-            >
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    placeholder="First Name"
-                    required
-                    className="w-full p-3 rounded-lg bg-[#222222] text-white focus:ring-1 focus:ring-white/60 outline-none"
-                  />
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    placeholder="Last Name"
-                    required
-                    className="w-full p-3 rounded-lg bg-[#222222] text-white focus:ring-1 focus:ring-white/60 outline-none"
-                  />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input
-                    type="email"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email"
-                    required
-                    className="w-full p-3 rounded-lg bg-[#222222] text-white focus:ring-1 focus:ring-white/60 outline-none"
-                  />
-                  <input
-                    type="text"
-                    value={cellNumber}
-                    onChange={(e) => {
-                      let value = e.target.value.replace(/\D/g, '');
-                      if (value.length > 4) value = value.slice(0, 4) + '-' + value.slice(4);
-                      if (value.length > 12) value = value.slice(0, 12);
-                      setCellNumber(value);
-                    }}
-                    placeholder="XXXX-XXXXXXX"
-                    required
-                    className="w-full p-3 rounded-lg bg-[#222222] text-white focus:ring-1 focus:ring-white/60 outline-none"
-                  />
-                </div>
-
-                <textarea
-                  name="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  rows={8}
-                  placeholder="Message"
-                  required
-                  className="w-full p-3 rounded-lg bg-[#222222] text-white focus:ring-1 focus:ring-white/60 outline-none"
-                ></textarea>
-
-                {status === 'success' && (
-                  <p className="text-green-500 font-medium">Message sent successfully!</p>
-                )}
-                {status === 'error' && (
-                  <p className="text-red-500 font-medium">Please fill out all fields.</p>
-                )}
-                {status === 'emailError' && (
-                  <p className="text-red-500 font-medium">
-                    Error sending email. Please try again.
-                  </p>
-                )}
-
-                <div className="text-center">
-                  <button
-                    type="submit"
-                    className="text-white px-6 py-3 rounded-full bg-[#222222] hover:bg-white hover:text-black transition duration-200"
-                  >
-                    Send Message
-                  </button>
-                </div>
-              </form>
-            </motion.div>
-          </div>
+        {/* Left text */}
+        <div className="text-white lg:w-[40%] w-full">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl 2xl:text-7xl font-bold">
+            Let's Create
+            <br />
+            Something Epic Together.
+          </h1>
         </div>
-      </section>
+
+        {/* Glass Form */}
+        <div className="bg-white/70 backdrop-blur-xl 
+        rounded-[20px] shadow-2xl 
+        p-6 sm:p-8 lg:p-[40px] w-full max-w-xl">
+
+          <h2 className="text-xl sm:text-3xl font-bold mb-6">
+            Enter Your Contact Details
+          </h2>
+
+          <form className="flex flex-col gap-6">
+
+            {["Name", "Email", "Phone"].map((field, i) => (
+              <div className="relative w-full group" key={i}>
+                <input
+                  type="text"
+                  required
+                  className="peer w-full border-b-2 border-gray-300 
+                  focus:border-[#ef476f] font-semibold
+                  outline-none py-3 bg-transparent"
+                  placeholder=" "
+                />
+                <label
+                  className="absolute left-0 top-3 font-semibold 
+                  text-[#222222] transition-all
+                  peer-placeholder-shown:top-3
+                  peer-placeholder-shown:text-lg
+                  peer-focus:-top-2
+                  peer-focus:text-sm
+                  peer-focus:text-[#ef476f]
+                  peer-valid:-top-2
+                  peer-valid:text-sm"
+                >
+                  {field} *
+                </label>
+              </div>
+            ))}
+
+            <div className="relative w-full">
+              <textarea
+                required
+                placeholder=" "
+                className="peer w-full border-b-2 border-gray-300
+                focus:border-[#ef476f]
+                font-semibold outline-none py-3
+                resize-none h-24 bg-transparent"
+              />
+              <label
+                className="absolute left-0 top-3 font-semibold 
+                text-[#222222] transition-all
+                peer-placeholder-shown:top-3
+                peer-placeholder-shown:text-lg
+                peer-focus:-top-2
+                peer-focus:text-sm
+                peer-focus:text-[#ef476f]
+                peer-valid:-top-2
+                peer-valid:text-sm"
+              >
+                Message *
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              className="inline-flex w-max items-center gap-2
+              bg-[#ef476f] hover:scale-105
+              text-white font-semibold px-6 py-3
+              rounded-full transition duration-300 mt-4"
+            >
+              <span className="flex items-center justify-center w-6 h-6 bg-white/20 rounded-full">
+                <FaArrowRight className="text-xs" />
+              </span>
+              Send Message
+            </button>
+
+          </form>
+        </div>
+      </div>
+    </motion.div>
+  </div>
+</section>
+
 
       <Footer />
     </>

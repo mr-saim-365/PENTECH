@@ -21,8 +21,7 @@ const itemVariants2 = {
 
 const OurStory = () => {
     return (
-        <div className="w-full bg-[linear-gradient(to_bottom_left,_#0b121e_80%,_#2f3a4d_100%)]
-relative py-20">
+        <div className="w-full relative py-20 text-[#222222] font-semibold">
             <div className="flex flex-col md:flex-row gap-5 lg:gap-10 items-center justify-center px-3 lg:w-[90%] 2xl:w-[70%] mx-auto">
 
 
@@ -35,7 +34,7 @@ relative py-20">
                 >
                     <div className="p-6">
              
-                        <h2 className="text-white/60 text-lg ">Join a community of thriving businesses and creators who trust us to bring their digital vision to life.</h2>
+                        <h2 className="text-lg ">Join a community of thriving businesses and creators who trust us to bring their digital vision to life.</h2>
                     </div>
                     <div className="w-full h-[200px] overflow-hidden rounded-bl-3xl rounded-br-3xl [mask-image:radial-gradient(circle_at_top_left,_white,_transparent)]">
                         <img src="/images/nature.jpg" alt="Styled Image" className="w-full h-full object-cover" />

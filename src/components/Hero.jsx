@@ -16,8 +16,7 @@ const fadeLeft = {
 
 const Hero = () => {
   return (
-    <div className="bg-[linear-gradient(to_top_right,_#0b121e_70%,_#2f3a4d_100%)]
- text-[#ffffff] flex flex-col py-4 w-full text-sm md:text-[15px]">
+    <div className="flex flex-col py-4 w-full text-sm md:text-[15px] text-[#222222]">
       <Navbar />
       <section id="hero" className="w-full relative sm:mb-20">
         <div
@@ -28,7 +27,7 @@ const Hero = () => {
           <div className="flex flex-wrap justify-between gap-y-10">
             <div className="w-full lg:w-1/2 order-2 lg:order-1 flex flex-col justify-center">
               <motion.h2
-                className="md:text-[48px] text-[#ffffff] mb-3 text-[36px] leading-normal  font-rubik"
+                className="md:text-[48px] mb-3 text-[36px] leading-normal  font-rubik"
                 variants={fadeLeft}
                 initial="hidden"
                 whileInView="visible"
@@ -38,7 +37,7 @@ const Hero = () => {
               </motion.h2>
 
               <motion.p
-                className="text-white/60 font-normal mb-7"
+                className="font-normal mb-7"
                 variants={fadeLeft}
                 initial="hidden"
                 whileInView="visible"

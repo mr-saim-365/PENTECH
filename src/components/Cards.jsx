@@ -28,7 +28,7 @@ const Cards = () => {
   };
 
   return (
-    <div ref={ref} className="bg-[linear-gradient(to_top_left,_#0b121e_80%,_#2f3a4d_100%)]">
+    <div ref={ref} className="text-[#222222] font-semibold">
       <div className="min-h-screen text-white px-3 flex flex-wrap gap-6 items-center lg:w-[90%] 2xl:w-[70%] mx-auto justify-center">
         <div className="flex flex-col md:flex-row gap-5 md:gap-10">
 

@@ -32,7 +32,7 @@ const ScrollTop = () => {
                 onClick={toggleScrollTop}
                 href="#"
                 id="scrollTop"
-                className={`fixed right-[15px] bottom-[15px] z-[99999] w-11 h-11 rounded-full text-[#ffffff] bg-deep-purple flex items-center justify-center transition-opacity duration-300 ${arrowActive ? "opacity-100 visible" : "opacity-0 invisible"
+                className={`fixed right-[16px] bottom-[20px] z-[99999] w-11 h-11 rounded-full text-[#222222] bg-[#FFFFFFB8] hover:scale-105 flex items-center justify-center transition-all  duration-300 ${arrowActive ? "opacity-100 visible" : "opacity-0 invisible"
                     }`}
 
             ><IoMdArrowUp size={20} />

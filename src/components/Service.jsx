@@ -124,11 +124,11 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="bg-[linear-gradient(to_bottom_right,_#0b121e_80%,_#2f3a4d_100%)] py-20">
-      <div className="w-full px-6 md:px-0 md:w-[90%] 2xl:w-[70%] mx-auto text-[#ffffff]">
+    <section id="services" className="text-[#222222] font-semibold py-20">
+      <div className="w-full px-6 md:px-0 md:w-[90%] 2xl:w-[70%] mx-auto ">
          <div className="flex flex-col gap-3 items-center text-center mb-10 md:mb-20 2xl:w-[70%] mx-auto">
           <h1 className="text-[36px] md:text-[40px]">Our Services</h1>
-          <p className="text-sm md:text-[16px]">At PENTECH, we provide a full spectrum of digital solutions designed to accelerate your growth and streamline your operations. From design to deployment, we build experiences that are fast, functional, and future-ready.</p>
+          <p className="text-sm md:text-[16px]">At BIZORTEX, we provide a full spectrum of digital solutions designed to accelerate your growth and streamline your operations. From design to deployment, we build experiences that are fast, functional, and future-ready.</p>
          </div>
         <div
           ref={containerRef}
@@ -209,7 +209,7 @@ const Services = () => {
             className="mx-auto text-center mb-12"
           >
             <h2 className="text-3xl mb-4">About Us</h2>
-            <p className="text-white/60">
+            <p >
               Crafting Tomorrow's Technology, Today
             </p>
           </motion.div>
@@ -232,14 +232,14 @@ const Services = () => {
               viewport={{ once: true, amount: 0.2 }}
               className="lg:pl-8"
             >
-              <p className="italic text-white mb-4">
+              <p className="italic mb-4">
                 Welcome to PENTECH — where innovation powers progress. As a
                 premier digital software house, we specialize in crafting
                 cutting-edge solutions that elevate businesses into the future.
                 From sleek websites to powerful applications, our goal is
                 simple: turn your digital vision into reality.
               </p>
-              <p className="text-white">
+              <p >
                 At PENTECH, our mission is to transform technology into impact. We
                 don't just build software — we solve problems. Every project we
                 undertake is guided by creativity, strategic thinking, and a

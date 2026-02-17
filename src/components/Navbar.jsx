@@ -49,15 +49,13 @@ const Navbar = () => {
   };
 
   return (
-    <header className="pt-5">
+    <header className="pt-5 text-[#222222] font-semibold ">
       <motion.div
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
         variants={containerVariants}
         className="mx-auto w-full md:px-0 md:w-[80%] 2xl:w-[90%] flex justify-end items-center px-4"
       >
-
-
         <motion.div
           variants={itemVariants}
           className="flex items-center space-x-4"
@@ -70,7 +68,7 @@ const Navbar = () => {
         </motion.div>
       </motion.div>
 
-      <div ref={ref} className="mb-4 mt-8">
+      <div ref={ref} className="mb-4">
         <motion.div
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
@@ -78,7 +76,7 @@ const Navbar = () => {
         >
           <motion.div
             variants={itemVariants}
-            className="mx-auto flex text-[#ffffff] justify-between items-center px-4 md:w-[90%] 2xl:w-[80%] md:px-1"
+            className="mx-auto flex  justify-between items-end  px-4 md:w-[90%] 2xl:w-[80%] md:px-1"
           >
             {/* <Link
               to="#"
@@ -89,66 +87,84 @@ const Navbar = () => {
       
         
             </Link> */}
+            <div className="flex flex-col gap-4">
+              <div>
+                <img
+                  className="w-[100px] h-[100px]"
+                  src="/images/logo.png"
+                  alt="PENTECH Logo"
+                ></img>
+              </div>
 
-            <nav
-              variants={itemVariants}
-              className="hidden md:flex items-center space-x-6"
-            >
-              <Link to="/" className="hover:scale-110 transition-all">
-                Home
-              </Link>
-
-              <a
-                onClick={(e) => {
-                  e.preventDefault();
-                  const section = document.getElementById("services");
-                  if (section) {
-                    section.scrollIntoView({ behavior: "smooth" });
-                    window.history.replaceState(
-                      null,
-                      "",
-                      window.location.pathname
-                    );
-                  }
-                }}
-                className="cursor-pointer hover:scale-110 transition-all"
+              <nav
+                variants={itemVariants}
+                className="hidden md:flex items-center space-x-6"
               >
-                Our Services
-              </a>
+                <Link to="/" className="hover:scale-110 transition-all">
+                  Home
+                </Link>
 
-              <a
-                onClick={(e) => {
-                  e.preventDefault();
-                  const section = document.getElementById("AboutUs");
-                  if (section) {
-                    section.scrollIntoView({ behavior: "smooth" });
-                    window.history.replaceState(
-                      null,
-                      "",
-                      window.location.pathname
-                    );
-                  }
-                }}
-                className="cursor-pointer hover:scale-110 transition-all"
-              >
-                About Us
-              </a>
-            </nav>
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const section = document.getElementById("services");
+                    if (section) {
+                      section.scrollIntoView({ behavior: "smooth" });
+                      window.history.replaceState(
+                        null,
+                        "",
+                        window.location.pathname,
+                      );
+                    }
+                  }}
+                  className="cursor-pointer hover:scale-110 transition-all"
+                >
+                  Our Services
+                </a>
+
+                <a
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const section = document.getElementById("AboutUs");
+                    if (section) {
+                      section.scrollIntoView({ behavior: "smooth" });
+                      window.history.replaceState(
+                        null,
+                        "",
+                        window.location.pathname,
+                      );
+                    }
+                  }}
+                  className="cursor-pointer hover:scale-110 transition-all"
+                >
+                  About Us
+                </a>
+              </nav>
+            </div>
 
             <motion.div
               variants={itemVariants}
-              className="hidden sm:flex items-center space-x-4"
+              className="hidden sm:flex items-center  space-x-4"
             >
               <Link to="/Contact" className="hover:scale-110 transition-all">
                 Contact Us
               </Link>
-              <a href="#" className="hover:text-gray-700 hover:scale-110 transition-all">
+              <a
+                href="#"
+                className="hover:text-gray-700 hover:scale-110 transition-all"
+              >
                 <FaTwitter size={18} />
               </a>
-              <a href="#" className="hover:text-blue-700 hover:scale-110 transition-all">
+              <a
+                href="#"
+                className="hover:text-blue-700 hover:scale-110 transition-all"
+              >
                 <FaFacebookF size={18} />
               </a>
-              <a href="#" className="hover:text-pink-500 hover:scale-110 transition-all">
+              <a
+                href="#"
+                className="hover:text-pink-500 hover:scale-110 transition-all"
+              >
                 <FaInstagram size={18} />
               </a>
             </motion.div>
@@ -192,7 +208,7 @@ const Navbar = () => {
                   window.history.replaceState(
                     null,
                     "",
-                    window.location.pathname
+                    window.location.pathname,
                   );
                 }
               }}
@@ -210,7 +226,7 @@ const Navbar = () => {
                   window.history.replaceState(
                     null,
                     "",
-                    window.location.pathname
+                    window.location.pathname,
                   );
                 }
               }}
