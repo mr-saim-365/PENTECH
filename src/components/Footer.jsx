@@ -115,12 +115,13 @@ const Footer = () => {
               <h4 className="text-sm md:text-base 2xl:text-[20px] text-[#FFFFFFB8] font-semibold pb-3">
                 Quick Links
               </h4>
-              <ul className="space-y-2 font-medium">
+              <ul className="space-y-2 font-medium ">
                 <li>
-                  <Link to="/">Home</Link>
+                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="/">Home</Link>
                 </li>
                 <li>
                   <Link
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
                     to={{
                       pathname: "/",
                       query: { scrollTo: "services" },
@@ -131,6 +132,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
+                  className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
                     to={{
                       pathname: "/",
                       query: { scrollTo: "AboutUs" },
@@ -140,7 +142,7 @@ const Footer = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Contact">Contact Us</Link>
+                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="/Contact">Contact Us</Link>
                 </li>
               </ul>
             </motion.div>
@@ -154,22 +156,22 @@ const Footer = () => {
               </h4>
               <ul className="space-y-2 font-medium">
                 <li>
-                  <Link to="#">Web Development</Link>
+                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Web Development</Link>
                 </li>
                 <li>
-                  <Link to="#">Logo Design</Link>
+                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Logo Design</Link>
+                </li> 
+                <li>
+                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Software Consultancy</Link>
                 </li>
                 <li>
-                  <Link to="#">Software Consultancy</Link>
+                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Graphic Designing</Link>
                 </li>
                 <li>
-                  <Link to="#">Graphic Designing</Link>
+                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Digital Marketing</Link>
                 </li>
                 <li>
-                  <Link to="#">Digital Marketing</Link>
-                </li>
-                <li>
-                  <Link to="#">Accounts Consultancy</Link>
+                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Accounts Consultancy</Link>
                 </li>
               </ul>
             </motion.div>
@@ -205,9 +207,9 @@ const Footer = () => {
             <div className="text-sm mt-1">
               Designed by <Link to="#">PENTECH</Link>
             </div> */}
-            <div className="p-[10px]">
+            {/* <div className="p-[10px]">
               <img src={BIZORTEX} alt="BIZORTEX Logo" className="w-full h-auto bg-none" />
-            </div>
+            </div> */}
           </motion.div>
         </motion.div>
       </div>

@@ -209,7 +209,7 @@ const Contact = () => {
                   type="text"
                   required
                   className="peer w-full border-b-2 border-gray-300 
-                  focus:border-[#ef476f] font-semibold
+                   font-semibold
                   outline-none py-3 bg-transparent"
                   placeholder=" "
                 />

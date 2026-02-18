@@ -51,42 +51,49 @@ const ServiceCard = React.memo(({ img, title, desc }) => (
   <motion.div
     variants={itemVariants}
     whileHover={{ scale: 1.02 }}
-    className="bg-[#222222] rounded-2xl shadow-lg"
+    className="bg-[#222222] rounded-2xl shadow-lg h-full flex flex-col"
   >
-    <img
-      src={img}
-      alt={title}
-      loading="lazy"
-      className="w-full h-[40vh] rounded-tl-2xl rounded-tr-2xl object-cover"
-    />
-    <div className="p-5 md:py-10 md:px-5">
-      <h3 className="text-[18px] md:text-[22px] mb-3 pb-2 font-semibold text-white">
+    <div className="w-full h-[60%] overflow-hidden rounded-t-2xl">
+      <img
+        src={img}
+        alt={title}
+        loading="lazy"
+        className="w-full h-full object-cover"
+      />
+    </div>
+
+    <div className="p-5 md:py-10 md:px-5 flex-1">
+      <h2 className="text-[18px] md:text-[25px] mb-3 pb-2 font-semibold text-white">
         {title}
-      </h3>
-      <p className="text-white/70 text-sm">{desc}</p>
+      </h2>
+      <p className="text-white/70 text-[15px]">{desc}</p>
     </div>
   </motion.div>
 ));
+
 
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState(2);
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
+  
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+useEffect(() => {
+  const checkMobile = () => setIsMobile(window.innerWidth < 768);
 
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
+  checkMobile();
+  window.addEventListener("resize", checkMobile);
 
-    const interval = setInterval(() => {
-      setActiveIndex((prevIndex) => (prevIndex + 1) % services.length);
-    }, 5000);
+  const interval = setInterval(() => {
+    setActiveIndex(prev => (prev + 1) % services.length);
+  }, 5000);
 
-    return () => clearInterval(interval);
-  }, []);
+  return () => {
+    window.removeEventListener("resize", checkMobile);
+    clearInterval(interval);
+  };
+}, []);
+
 
   const getCardStyle = (index) => {
     const diff = index - activeIndex;
@@ -124,19 +131,22 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="text-[#222222] font-semibold py-20">
+    <section id="services" className="text-[#222222] bg-[#F1F2F4] font-semibold py-20">
       <div className="w-full px-6 md:px-0 md:w-[90%] 2xl:w-[70%] mx-auto ">
-         <div className="flex flex-col gap-3 items-center text-center mb-10 md:mb-20 2xl:w-[70%] mx-auto">
-          <h1 className="text-[36px] md:text-[40px]">Our Services</h1>
-          <p className="text-sm md:text-[16px]">At BIZORTEX, we provide a full spectrum of digital solutions designed to accelerate your growth and streamline your operations. From design to deployment, we build experiences that are fast, functional, and future-ready.</p>
-         </div>
+        <div className="flex flex-col gap-4 items-center text-center mb-10 md:mb-20 2xl:w-[70%] mx-auto">
+          <h1 className="text-[36px] md:text-[40px] 2xl:text-5xl font-semibold uppercase">Our Services</h1>
+          <p className="text-sm md:text-[16px]">
+            At BIZORTEX, we provide a full spectrum of digital solutions
+            designed to accelerate your growth and streamline your operations.
+            From design to deployment, we build experiences that are fast,
+            functional, and future-ready.
+          </p>
+        </div>
         <div
           ref={containerRef}
           className="hidden md:flex w-full h-[80vh] max-h-[600px] relative items-center justify-center"
           style={{ perspective: "1200px" }}
         >
-
-
           {services.map((src, index) => {
             const style = getCardStyle(index);
 
@@ -169,7 +179,7 @@ const Services = () => {
                       : "none",
                 }}
               >
-                <ServiceCard key={index} {...src} />
+                <ServiceCard  {...src} />
               </motion.div>
             );
           })}
@@ -190,10 +200,10 @@ const Services = () => {
                   className=" w-full h-[25vh] rounded-t-2xl object-cover"
                 />
                 <div className="p-5">
-                  <h3 className="text-lg font-semibold text-white mb-2">
+                  <h3 className="text-[18px] font-semibold text-white mb-2">
                     {src.title}
                   </h3>
-                  <p className="text-white/70 text-sm">{src.desc}</p>
+                  <p className="text-white/70 text-xs">{src.desc}</p>
                 </div>
               </div>
             ))}
@@ -208,10 +218,8 @@ const Services = () => {
             variants={itemVariants}
             className="mx-auto text-center mb-12"
           >
-            <h2 className="text-3xl mb-4">About Us</h2>
-            <p >
-              Crafting Tomorrow's Technology, Today
-            </p>
+            <h2 className="text-4xl 2xl:text-5xl mb-4 font-semibold">About Us</h2>
+            <p>Crafting Tomorrow's Technology, Today</p>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-6 text-sm md:text-[16px] items-center">
@@ -233,16 +241,16 @@ const Services = () => {
               className="lg:pl-8"
             >
               <p className="italic mb-4">
-                Welcome to PENTECH — where innovation powers progress. As a
+                Welcome to BIZORTEX — where innovation powers progress. As a
                 premier digital software house, we specialize in crafting
                 cutting-edge solutions that elevate businesses into the future.
                 From sleek websites to powerful applications, our goal is
                 simple: turn your digital vision into reality.
               </p>
-              <p >
-                At PENTECH, our mission is to transform technology into impact. We
-                don't just build software — we solve problems. Every project we
-                undertake is guided by creativity, strategic thinking, and a
+              <p>
+                At BIZORTEX, our mission is to transform technology into impact.
+                We don't just build software — we solve problems. Every project
+                we undertake is guided by creativity, strategic thinking, and a
                 relentless pursuit of excellence. Whether you're a startup or a
                 global enterprise, we’re here to deliver tailored digital
                 experiences that inspire, engage, and perform.
