@@ -45,7 +45,7 @@ const Hero = () => {
                   whileInView="visible"
                   viewport={{ once: true, amount: 0.2 }}
                 >
-                  Cross Layer Information Exchange
+                 Empowering Businesses Through Intelligent Technology
                 </motion.p>
 
                 <motion.div

@@ -53,7 +53,7 @@ const Footer = () => {
         className="w-full flex flex-col items-center"
       >
         <motion.div
-          className="py-[80px] pb-[40px] md:w-[90%] px-8 md:px-0 flex items-center justify-center"
+          className="py-[80px]  md:w-[90%] px-8 md:px-0 flex items-center justify-center"
           initial="hidden"
           animate={controls}
           variants={containerVariants}
@@ -193,25 +193,7 @@ const Footer = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          className="text-center mt-8 border-t py-8 border-white/20  w-full px-4 md:px-0"
-          initial="hidden"
-          animate={controls}
-          variants={itemVariants}
-        >
-          <motion.div className="w-[90%] mx-auto">
-            {/* <p className="mb-1">
-              © <span>Copyright</span> <strong className="px-1">Impact</strong>{" "}
-              <span>All Rights Reserved</span>
-            </p>
-            <div className="text-sm mt-1">
-              Designed by <Link to="#">PENTECH</Link>
-            </div> */}
-            {/* <div className="p-[10px]">
-              <img src={BIZORTEX} alt="BIZORTEX Logo" className="w-full h-auto bg-none" />
-            </div> */}
-          </motion.div>
-        </motion.div>
+
       </div>
     </footer>
   );
