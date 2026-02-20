@@ -4,8 +4,7 @@ import React from 'react';
 import Hero from "../components/Hero";
 import Service from "../components/Service";
 import ScrollTop from "../components/ScrollTop";
-import OurStory from "../components/OurStory";
-import Cards from "../components/Cards";
+import FeaturedProducts from "../components/FeaturedProducts";
 import Footer from "../components/Footer";
 import '@fontsource/rubik';
 import { useEffect } from "react";
@@ -35,7 +34,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <OurStory />
+      <FeaturedProducts />
       <Service />
       <ScrollTop />
       <Footer />

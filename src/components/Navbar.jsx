@@ -7,6 +7,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const { ref, inView } = useInView({
@@ -39,15 +40,22 @@ const Navbar = () => {
     setIsMobile(window.innerWidth <= 768);
   }, []);
 
-  const debouncedObserver = useCallback(() => {}, []);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      window.history.replaceState(null, "", window.location.pathname); // remove hash
+  const handleScrollNavigation = (sectionId) => {
+    if (location.pathname !== "/") {
+      // If NOT on home → navigate with query param
+      navigate(`/?scrollTo=${sectionId}`);
+    } else {
+      // If already on home → scroll directly
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
+
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -61,14 +69,7 @@ const Navbar = () => {
 
   return (
     <header className="pt-5 text-[#222222] font-semibold ">
-      {/* <motion.div
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        variants={containerVariants}
-        className="mx-auto w-full md:px-0 md:w-[80%] 2xl:w-[90%] flex justify-end items-center px-4"
-      >
 
-      </motion.div> */}
 
       <div ref={ref} className="mb-4">
         <motion.div
@@ -106,36 +107,14 @@ const Navbar = () => {
                 </Link>
 
                 <a
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const section = document.getElementById("services");
-                    if (section) {
-                      section.scrollIntoView({ behavior: "smooth" });
-                      window.history.replaceState(
-                        null,
-                        "",
-                        window.location.pathname,
-                      );
-                    }
-                  }}
+                  onClick={() => handleScrollNavigation("services")}
                   className="cursor-pointer hover:scale-105 transition-all hover:text-[#f14160]"
                 >
                   Our Services
                 </a>
 
                 <a
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const section = document.getElementById("AboutUs");
-                    if (section) {
-                      section.scrollIntoView({ behavior: "smooth" });
-                      window.history.replaceState(
-                        null,
-                        "",
-                        window.location.pathname,
-                      );
-                    }
-                  }}
+                  onClick={() => handleScrollNavigation("AboutUs")}
                   className="cursor-pointer hover:scale-105 transition-all hover:text-[#f14160]"
                 >
                   About Us
@@ -183,7 +162,10 @@ const Navbar = () => {
               aria-label="Toggle Menu"
             >
               {mobileMenuOpen ? (
-                <IoMdClose size={15} className="w-5 h-5 text-[#262626] fixed top-6 right-6" />
+                <IoMdClose
+                  size={15}
+                  className="w-5 h-5 text-[#262626] fixed top-6 right-6"
+                />
               ) : (
                 <IoMdMenu size={20} className="w-6 h-6 " />
               )}
