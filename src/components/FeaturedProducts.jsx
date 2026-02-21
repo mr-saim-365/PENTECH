@@ -100,7 +100,7 @@ const ProductFeatures = () => {
   };
 
   return (
-    <section className="bg-[#0e0e0e] text-white py-20 px-6">
+    <section className="bg-[#f1f2f4] text-[#262626] py-20 px-6">
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
@@ -112,7 +112,7 @@ const ProductFeatures = () => {
         <h2 className="text-4xl md:text-5xl font-bold mb-4">
           Powerful Product Features
         </h2>
-        <p className="text-[#FFFFFF80] max-w-2xl mx-auto">
+        <p className="text-gray-500 max-w-2xl mx-auto">
           Built with cutting-edge technology to deliver performance, security,
           and scalability for modern businesses.
         </p>
@@ -136,7 +136,7 @@ const ProductFeatures = () => {
                 y: -10,
                 scale: 1.03,
               }}
-              className={`p-8 rounded-2xl bg-gradient-to-br ${feature.theme.bg}
+              className={`p-8 rounded-2xl  shadow-2xl bg-gradient-to-br ${feature.theme.bg}
                 backdrop-blur-md relative overflow-hidden group`}
             >
     

@@ -1,22 +1,45 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
 };
 
-const containerVariants = {
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
   visible: {
-    transition: {
-      staggerChildren: 0.2,
-    },
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" },
+  },
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8 },
+  },
+};
+
+const fadeRight = {
+  hidden: { opacity: 0, x: 20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8 },
   },
 };
 
 const services = [
   {
-    img: "/images/serviceImage1.jpg",
+    img: "/images/WebDevelopment.jpg",
     title: "Web Development",
     desc: "We craft responsive and visually stunning websites with user-friendly interfaces. Using modern technologies like React, Next.js, and Tailwind CSS, we ensure your web presence stands out and performs seamlessly across all devices.",
   },
@@ -45,221 +68,200 @@ const services = [
     title: "Accounts Consultancy",
     desc: "We offer expert account consultancy to streamline your financial processes, improve profitability, and ensure compliance with sound financial advice and strategy.",
   },
+    {
+    img: "/images/Vpshosting.jpg",
+    title: "VPS Hosting",
+    desc: "We offer expert VPS hosting solutions to ensure your website runs smoothly and securely. Our hosting services are optimized for performance and reliability.",
+  },
 ];
-
-const ServiceCard = React.memo(({ img, title, desc }) => (
-  <motion.div
-    variants={itemVariants}
-    whileHover={{ scale: 1.02 }}
-    className="bg-[#222222] rounded-2xl shadow-lg h-full flex flex-col"
-  >
-    <div className="w-full h-[60%] overflow-hidden rounded-t-2xl">
-      <img
-        src={img}
-        alt={title}
-        loading="lazy"
-        className="w-full h-full object-cover"
-      />
-    </div>
-
-    <div className="p-5 md:py-10 md:px-5 flex-1">
-      <h2 className="text-[18px] md:text-[25px] mb-3 pb-2 font-semibold text-white">
-        {title}
-      </h2>
-      <p className="text-white/70 text-[15px]">{desc}</p>
-    </div>
-  </motion.div>
-));
 
 
 const Services = () => {
   const [activeIndex, setActiveIndex] = useState(2);
   const containerRef = useRef(null);
   const [isMobile, setIsMobile] = useState(false);
-  
 
-useEffect(() => {
-  const checkMobile = () => setIsMobile(window.innerWidth < 768);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
 
-  checkMobile();
-  window.addEventListener("resize", checkMobile);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
 
-  const interval = setInterval(() => {
-    setActiveIndex(prev => (prev + 1) % services.length);
-  }, 5000);
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % services.length);
+    }, 5000);
 
-  return () => {
-    window.removeEventListener("resize", checkMobile);
-    clearInterval(interval);
-  };
-}, []);
-
-
-  const getCardStyle = (index) => {
-    const diff = index - activeIndex;
-    let transform = "";
-    let zIndex = 5 - Math.abs(diff);
-    let opacity = 1;
-    let filter = "none";
-
-    if (diff === 0) {
-      transform = "scale(1) translateZ(0)";
-      zIndex = 10;
-    } else {
-      const scale = 0.9 - Math.abs(diff) * 0.05;
-      opacity = 1 - Math.abs(diff) * 0.15;
-
-      if (diff < 0) {
-        const translateX = -20 * Math.abs(diff);
-        transform = `scale(${scale}) translateX(${translateX}%) rotateY(5deg) translateZ(-100px)`;
-      } else {
-        const translateX = 20 * Math.abs(diff);
-        transform = `scale(${scale}) translateX(${translateX}%) rotateY(-5deg) translateZ(-100px)`;
-      }
-    }
-
-    return {
-      zIndex,
-      opacity,
-      transform,
-      filter,
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+      clearInterval(interval);
     };
-  };
+  }, []);
+
 
   const handleClick = (index) => {
     setActiveIndex(index);
   };
 
   return (
-    <section id="services" className="text-[#222222] bg-[#F1F2F4] font-semibold py-20">
-      <div className="w-full px-6 md:px-0 md:w-[90%] 2xl:w-[70%] mx-auto ">
-        <div className="flex flex-col gap-4 items-center text-center mb-10 md:mb-20 2xl:w-[70%] mx-auto">
-          <h1 className="text-[36px] md:text-[40px] 2xl:text-5xl font-semibold uppercase">Our Services</h1>
-          <p className="text-sm md:text-[16px]">
-            At BIZORTEX, we provide a full spectrum of digital solutions
-            designed to accelerate your growth and streamline your operations.
-            From design to deployment, we build experiences that are fast,
-            functional, and future-ready.
-          </p>
-        </div>
-        <div
-          ref={containerRef}
-          className="hidden md:flex w-full h-[80vh] max-h-[600px] relative items-center justify-center"
-          style={{ perspective: "1200px" }}
-        >
-          {services.map((src, index) => {
-            const style = getCardStyle(index);
 
-            return (
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.2 }}
-                key={index}
-                className="absolute cursor-pointer"
-                animate={{
-                  zIndex: style.zIndex,
-                  opacity: style.opacity,
-                }}
-                transition={{ duration: 0.4 }}
-                onClick={() => handleClick(index)}
-                style={{
-                  transform: style.transform,
-                  filter: style.filter,
-                  transformStyle: "preserve-3d",
-                  transition: "transform 0.4s ease-out",
-                  borderRadius: "16px",
-                  overflow: "hidden",
-                  width: "50%",
-                  height: "100%",
-                  boxShadow:
-                    index === activeIndex
-                      ? "0 10px 30px rgba(0,0,0,0.2)"
-                      : "none",
-                }}
-              >
-                <ServiceCard  {...src} />
-              </motion.div>
-            );
-          })}
-        </div>
+     <motion.section
+      id="services"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      variants={sectionVariants}
+      className="text-[#222222] bg-[#F1F2F4] font-semibold py-20"
+    >
+      {/* DARK INNER SECTION */}
+      <section className="bg-[#0e0e0e] text-white py-24 px-4 md:px-0 relative overflow-hidden">
 
-        {/* for small screen */}
-        <div className="w-full md:hidden">
-          <div className="overflow-x-auto flex gap-4  py-6 scrollbar-hide snap-x snap-mandatory scroll-smooth">
-            {services.map((src, index) => (
-              <div
-                key={index}
-                className="min-w-[80%] snap-center bg-[#222222] rounded-2xl shadow-lg"
-              >
-                <img
-                  src={src.img}
-                  alt={src.title}
-                  loading="lazy"
-                  className=" w-full h-[25vh] rounded-t-2xl object-cover"
-                />
-                <div className="p-5">
-                  <h3 className="text-[18px] font-semibold text-white mb-2">
-                    {src.title}
-                  </h3>
-                  <p className="text-white/70 text-xs">{src.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        {/* Background Glow */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#f14160]/20 blur-[180px] rounded-full opacity-30" />
 
-        <section id="AboutUs" className="mt-16">
+        <div className="max-w-7xl mx-auto relative z-10">
+
+          {/* Heading */}
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={itemVariants}
-            className="mx-auto text-center mb-12"
+            variants={fadeUp}
+            className="flex flex-col gap-4 items-center text-center mb-10 md:mb-20 2xl:w-[70%] mx-auto"
           >
-            <h2 className="text-4xl 2xl:text-5xl mb-4 font-semibold">About Us</h2>
-            <p>Crafting Tomorrow's Technology, Today</p>
+            <h1 className="text-[36px] md:text-[40px] 2xl:text-5xl font-bold uppercase">
+              Our Services
+            </h1>
+            <p className="text-sm md:text-[16px] text-white/70">
+              At BIZORTEX, we provide a full spectrum of digital solutions
+              designed to accelerate your growth and streamline your operations.
+              From design to deployment, we build experiences that are fast,
+              functional, and future-ready.
+            </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 md:gap-6 text-sm md:text-[16px] items-center">
+          {/* Main Grid */}
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+
+            {/* LEFT IMAGE */}
             <motion.div
-              variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
+              variants={fadeLeft}
+              whileHover={{ scale: 1.02 }}
+              className="relative h-[450px] rounded-3xl border border-white/20 overflow-hidden shadow-2xl group"
             >
-              <h3 className="text-[16px] sm:text-2xl font-semibold mb-4">
-                Empowering Your Digital Future with Innovative Solutions
-              </h3>
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={services[activeIndex].img}
+                  src={services[activeIndex].img}
+                  alt={services[activeIndex].title}
+                  initial={{ opacity: 0, scale: 1.05 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </AnimatePresence>
+
+              {/* Dark Overlay */}
+              <div className="absolute inset-0 bg-black/40" />
+
             </motion.div>
-            <motion.div
-              variants={itemVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              className="lg:pl-8"
-            >
-              <p className="italic mb-4">
-                Welcome to BIZORTEX — where innovation powers progress. As a
-                premier digital software house, we specialize in crafting
-                cutting-edge solutions that elevate businesses into the future.
-                From sleek websites to powerful applications, our goal is
-                simple: turn your digital vision into reality.
-              </p>
-              <p>
-                At BIZORTEX, our mission is to transform technology into impact.
-                We don't just build software — we solve problems. Every project
-                we undertake is guided by creativity, strategic thinking, and a
-                relentless pursuit of excellence. Whether you're a startup or a
-                global enterprise, we’re here to deliver tailored digital
-                experiences that inspire, engage, and perform.
-              </p>
+
+            {/* RIGHT LIST */}
+            <motion.div variants={fadeRight} className="space-y-6">
+              {services.map((service, index) => (
+                <motion.div
+                  key={index}
+                  onClick={() => setActiveIndex(index)}
+                  whileHover={{ x: 12, scale: 1.02 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                  className={`cursor-pointer p-6 rounded-2xl transition-all duration-300 border
+                    ${
+                      index === activeIndex
+                        ? "bg-white/5 border-white/20 shadow-lg"
+                        : "border-transparent hover:bg-white/5"
+                    }`}
+                >
+                  <div className="flex items-start gap-4">
+
+                    {/* Number */}
+                    <span
+                      className={`text-lg font-bold ${
+                        index === activeIndex
+                          ? "text-[#f14160]"
+                          : "text-white/40"
+                      }`}
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+
+                    {/* Content */}
+                    <div>
+                      <h3 className="text-xl font-semibold mb-2">
+                        {service.title}
+                      </h3>
+
+                      {index === activeIndex && (
+                        <motion.p
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.4 }}
+                          className="text-white/60 text-sm"
+                        >
+                          {service.desc}
+                        </motion.p>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </motion.div>
+
           </div>
-        </section>
-      </div>
-    </section>
+        </div>
+      </section>
+
+      {/* ================= ABOUT SECTION ================= */}
+
+      <motion.section
+        id="AboutUs"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+        className="mt-20 px-4 md:px-6"
+      >
+        <motion.div variants={fadeUp} className="mx-auto text-center mb-12">
+          <h2 className="text-4xl 2xl:text-5xl mb-4 font-bold">
+            About Us
+          </h2>
+          <p className="text-[#555]">
+            Crafting Tomorrow's Technology, Today
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 text-sm md:text-[16px] items-center">
+
+          <motion.div variants={fadeLeft}>
+            <h3 className="text-[16px] sm:text-2xl font-semibold mb-4">
+              Empowering Your Digital Future with Innovative Solutions
+            </h3>
+          </motion.div>
+
+          <motion.div variants={fadeRight} className="lg:pl-8">
+            <p className="italic mb-4 text-[#444]">
+              Welcome to BIZORTEX — where innovation powers progress.
+              As a premier digital software house, we specialize in crafting
+              cutting-edge solutions that elevate businesses into the future.
+            </p>
+            <p className="text-[#555]">
+              At BIZORTEX, our mission is to transform technology into impact.
+              We don't just build software — we solve problems. Whether you're a
+              startup or a global enterprise, we deliver tailored digital
+              experiences that inspire, engage, and perform.
+            </p>
+          </motion.div>
+
+        </div>
+      </motion.section>
+
+    </motion.section>
   );
 };
 

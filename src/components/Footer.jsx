@@ -6,9 +6,8 @@ import { IoLogoInstagram } from "react-icons/io5";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import footerImage from "/images/footerImage.png";
-import BIZORTEX from "/images/Bizortex.png";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 const Footer = () => {
   const controls = useAnimation();
@@ -43,6 +42,22 @@ const Footer = () => {
         ease: "easeOut",
       },
     },
+  };
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleScrollNavigation = (sectionId) => {
+    if (location.pathname !== "/") {
+      // If NOT on home → navigate with query param
+      navigate(`/?scrollTo=${sectionId}`);
+    } else {
+      // If already on home → scroll directly
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   };
 
   return (
@@ -117,32 +132,44 @@ const Footer = () => {
               </h4>
               <ul className="space-y-2 font-medium ">
                 <li>
-                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="/">Home</Link>
+                  <Link
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
+                    to="/"
+                  >
+                    Home
+                  </Link>
                 </li>
                 <li>
                   <Link
-                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
-                    to={{
-                      pathname: "/",
-                      query: { scrollTo: "services" },
+                    to="#"
+                    onClick={(e) => {
+                      e.preventDefault(); // 🔥 VERY IMPORTANT
+                      handleScrollNavigation("services");
                     }}
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
                   >
                     0ur Services
                   </Link>
                 </li>
                 <li>
                   <Link
-                  className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
-                    to={{
-                      pathname: "/",
-                      query: { scrollTo: "AboutUs" },
+                    to="#"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleScrollNavigation("AboutUs");
                     }}
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
                   >
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="/Contact">Contact Us</Link>
+                  <Link
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
+                    to="/Contact"
+                  >
+                    Contact Us
+                  </Link>
                 </li>
               </ul>
             </motion.div>
@@ -156,22 +183,52 @@ const Footer = () => {
               </h4>
               <ul className="space-y-2 font-medium">
                 <li>
-                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Web Development</Link>
+                  <Link
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
+                    to="#"
+                  >
+                    Web Development
+                  </Link>
                 </li>
                 <li>
-                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Logo Design</Link>
-                </li> 
-                <li>
-                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Software Consultancy</Link>
+                  <Link
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
+                    to="#"
+                  >
+                    Logo Design
+                  </Link>
                 </li>
                 <li>
-                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Graphic Designing</Link>
+                  <Link
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
+                    to="#"
+                  >
+                    Software Consultancy
+                  </Link>
                 </li>
                 <li>
-                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Digital Marketing</Link>
+                  <Link
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
+                    to="#"
+                  >
+                    Graphic Designing
+                  </Link>
                 </li>
                 <li>
-                  <Link className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105" to="#">Accounts Consultancy</Link>
+                  <Link
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
+                    to="#"
+                  >
+                    Digital Marketing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className="hover:text-[#f14160] inline-block transition-transform duration-200 hover:scale-105"
+                    to="#"
+                  >
+                    Accounts Consultancy
+                  </Link>
                 </li>
               </ul>
             </motion.div>
@@ -192,8 +249,6 @@ const Footer = () => {
             </motion.div>
           </motion.div>
         </motion.div>
-
-
       </div>
     </footer>
   );
