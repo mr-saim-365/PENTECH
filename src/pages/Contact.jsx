@@ -30,8 +30,7 @@ const fadeUp = {
 
 const Contact = () => {
   const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [Name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [cellNumber, setCellNumber] = useState("");
   const [status, setStatus] = useState("");
@@ -39,7 +38,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!firstName || !lastName || !email || !cellNumber || !message) {
+    if (!Name || !email || !cellNumber || !message) {
       setStatus("error");
       return;
     }
@@ -49,19 +48,16 @@ const Contact = () => {
     const publicKey = "1T9xbZKxb37vbLUVd";
 
     const templateParams = {
-      from_firstName: firstName,
-      from_lastName: lastName,
+      from_Name: Name,
       from_email: email,
       from_phone: cellNumber,
-
       message,
     };
 
     try {
       await emailjs.send(serviceId, templateId, templateParams, publicKey);
       setStatus("success");
-      setFirstName("");
-      setLastName("");
+      setName("");
       setEmail("");
       setMessage("");
       setCellNumber("");
@@ -74,14 +70,13 @@ const Contact = () => {
   return (
     <>
       <Navbar />
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         className="overflow-hidden"
       >
         <div className="pt-16 text-[#222222]">
-  
           <motion.div
             variants={container}
             initial="hidden"
@@ -100,12 +95,10 @@ const Contact = () => {
             </motion.p>
           </motion.div>
 
-        
           <div
             className="w-full md:w-[95%] 2xl:w-[85%] mx-auto 
         flex flex-col lg:flex-row gap-16 py-20 px-4 justify-between md:px-0"
           >
-       
             <motion.div
               initial={{ opacity: 0, x: -60 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -130,7 +123,6 @@ const Contact = () => {
               </h1>
             </motion.div>
 
-   
             <motion.div
               variants={container}
               initial="hidden"
@@ -193,7 +185,6 @@ const Contact = () => {
             </motion.div>
           </div>
 
-       
           <motion.div
             style={{ backgroundImage: `url(${bgcontact})` }}
             initial={{ opacity: 0 }}
@@ -207,7 +198,6 @@ const Contact = () => {
           flex flex-col lg:flex-row gap-16
           w-full md:w-[95%] 2xl:w-[85%] justify-between mx-auto"
             >
-        
               <motion.div
                 initial={{ opacity: 0, x: -60 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -232,7 +222,7 @@ const Contact = () => {
                   Enter Your Contact Details
                 </h2>
 
-                <form className="flex flex-col gap-8">
+                {/* <form  className="flex flex-col gap-8">
                   {["Name", "Email", "Phone"].map((field, i) => (
                     <div key={i} className="relative">
                       <input
@@ -294,6 +284,141 @@ const Contact = () => {
                     Send Message
                     <FaArrowRight />
                   </button>
+                </form> */}
+                <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+                  {/* Name */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      required
+                      value={Name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder=" "
+                      className="peer w-full border-b-2 border-gray-300
+      outline-none py-3 bg-transparent font-semibold"
+                    />
+                    <label
+                      className="absolute left-0 top-3 text-gray-700 font-semibold transition-all
+      peer-placeholder-shown:top-3
+      peer-placeholder-shown:text-lg
+      peer-focus:-top-2
+      peer-focus:text-sm
+      peer-focus:text-[#ef476f]
+      peer-valid:-top-2
+      peer-valid:text-sm
+      peer-valid:text-[#ef476f]"
+                    >
+                      Name *
+                    </label>
+                  </div>
+
+                  {/* Email */}
+                  <div className="relative">
+                    <input
+                      type="email"
+                      required
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder=" "
+                      className="peer w-full border-b-2 border-gray-300
+      outline-none py-3 bg-transparent font-semibold"
+                    />
+                    <label
+                      className="absolute left-0 top-3 text-gray-700 font-semibold transition-all
+      peer-placeholder-shown:top-3
+      peer-placeholder-shown:text-lg
+      peer-focus:-top-2
+      peer-focus:text-sm
+      peer-focus:text-[#ef476f]
+      peer-valid:-top-2
+      peer-valid:text-sm
+      peer-valid:text-[#ef476f]"
+                    >
+                      Email *
+                    </label>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      required
+                      value={cellNumber}
+                      onChange={(e) => setCellNumber(e.target.value)}
+                      placeholder=" "
+                      className="peer w-full border-b-2 border-gray-300
+      outline-none py-3 bg-transparent font-semibold"
+                    />
+                    <label
+                      className="absolute left-0 top-3 text-gray-700 font-semibold transition-all
+      peer-placeholder-shown:top-3
+      peer-placeholder-shown:text-lg
+      peer-focus:-top-2
+      peer-focus:text-sm
+      peer-focus:text-[#ef476f]
+      peer-valid:-top-2
+      peer-valid:text-sm
+      peer-valid:text-[#ef476f]"
+                    >
+                      Phone *
+                    </label>
+                  </div>
+
+                  {/* Message */}
+                  <div className="relative w-full">
+                    <textarea
+                      required
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder=" "
+                      className="peer w-full border-b-2 border-gray-300
+      font-semibold outline-none py-3
+      resize-none h-24 bg-transparent"
+                    />
+                    <label
+                      className="absolute left-0 top-3 font-semibold
+      text-[#222222] transition-all
+      peer-placeholder-shown:top-3
+      peer-placeholder-shown:text-lg
+      peer-focus:-top-2
+      peer-focus:text-sm
+      peer-focus:text-[#ef476f]
+      peer-valid:-top-2
+      peer-valid:text-sm
+      peer-valid:text-[#ef476f]"
+                    >
+                      Message *
+                    </label>
+                  </div>
+
+                  {/* Status Messages */}
+                  {status === "success" && (
+                    <p className="text-green-600 font-semibold">
+                      Message sent successfully!
+                    </p>
+                  )}
+                  {status === "error" && (
+                    <p className="text-red-500 font-semibold">
+                      Please fill all fields.
+                    </p>
+                  )}
+                  {status === "emailError" && (
+                    <p className="text-red-500 font-semibold">
+                      Something went wrong. Try again.
+                    </p>
+                  )}
+
+                  {/* Submit */}
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center gap-2 cursor-pointer
+    bg-[#ef476f] text-white font-semibold
+    px-6 py-3 rounded-full w-max
+    hover:scale-105 active:scale-95
+    transition duration-300 mt-4"
+                  >
+                    Send Message
+                  </button>
                 </form>
               </motion.div>
             </div>
@@ -303,7 +428,6 @@ const Contact = () => {
       <Footer />
     </>
   );
-
 };
 
 export default Contact;
