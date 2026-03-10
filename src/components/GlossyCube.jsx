@@ -28,7 +28,7 @@ const AnimatedCube = () => {
           <boxGeometry args={[2.5, 2.5, 2.5]} />
           <MeshTransmissionMaterial
             backside
-            samples={16}
+            samples={4}
             thickness={0.5}
             chromaticAberration={0.05}
             anisotropy={0.1}
@@ -61,7 +61,7 @@ const AnimatedCube = () => {
 const GlossyCube = () => {
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [0, 0, 8], fov: 35 }} alpha={true}>
+      <Canvas camera={{ position: [0, 0, 8], fov: 35 }} gl={{ alpha: true }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} intensity={150} color="#e11d48" />
         <pointLight position={[-10, -10, -10]} intensity={100} color="#7c3aed" />

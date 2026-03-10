@@ -1,15 +1,18 @@
 // src/pages/Home.jsx
-import React from 'react';
-import Hero from "../components/Hero";
-import Service from "../components/Service";
-import About from "../components/About";
-import Process from "../components/Process";
-import ScrollTop from "../components/ScrollTop";
-import FeaturedProducts from "../components/FeaturedProducts";
-import Footer from "../components/Footer";
-import '@fontsource/rubik';
-import { useEffect } from "react";
+import React, { Suspense, lazy, useEffect } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
+import '@fontsource/rubik';
+
+// Critical Components (Visible immediately or near top)
+import Hero from "../components/Hero";
+import ScrollTop from "../components/ScrollTop";
+
+// Lazy Components (Below the fold)
+const Service = lazy(() => import("../components/Service"));
+const About = lazy(() => import("../components/About"));
+const Process = lazy(() => import("../components/Process"));
+const FeaturedProducts = lazy(() => import("../components/FeaturedProducts"));
+const Footer = lazy(() => import("../components/Footer"));
 
 const Home = () => {
   const location = useLocation();
@@ -43,12 +46,14 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <FeaturedProducts />
-      <About />
-      <Service />
-      <Process />
+      <Suspense fallback={<div className="h-96 w-full bg-[#050505]" />}>
+        <FeaturedProducts />
+        <About />
+        <Service />
+        <Process />
+        <Footer />
+      </Suspense>
       <ScrollTop />
-      <Footer />
     </>
   );
 };

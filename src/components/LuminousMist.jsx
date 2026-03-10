@@ -57,11 +57,10 @@ const MistShader = {
       float glow = pow(max(0.0, 1.0 - dist * 0.85), 2.2);
 
       // ── 2. ANIMATED NOISE for volumetric smoke tendrils ──
-      vec2 p = uv * 2.0;
-      float n1 = snoise(p + vec2(time * 0.3, time * 0.1));
-      float n2 = snoise(p * 2.2 + vec2(-time * 0.2, n1 * 0.4 + time * 0.15));
-      float n3 = snoise(p * 4.5 + vec2(n1 * 0.3, n2 * 0.3 - time * 0.25));
-      float noise = n1 * 0.5 + n2 * 0.32 + n3 * 0.18;
+      vec2 p = uv * 1.5;
+      float n1 = snoise(p + vec2(time * 0.2, time * 0.1));
+      float n2 = snoise(p * 2.5 + vec2(-time * 0.15, n1 * 0.3 + time * 0.1));
+      float noise = n1 * 0.6 + n2 * 0.4;
       noise = noise * 0.5 + 0.5; // remap to [0,1]
 
       // ── 3. DIRECTIONAL MASK — light fans left from right edge ──
@@ -139,8 +138,8 @@ const LuminousMist = () => {
       <Canvas
         orthographic
         camera={{ left: -1, right: 1, top: 1, bottom: -1, near: 0.1, far: 10 }}
-        dpr={[1, 2]}
-        gl={{ alpha: false, antialias: false }}
+        dpr={1}
+        gl={{ alpha: true, antialias: false }}
       >
         <MistMesh />
       </Canvas>

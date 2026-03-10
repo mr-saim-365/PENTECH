@@ -1,13 +1,16 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
-import GlossyCube from "./GlossyCube";
-import LuminousMist from "./LuminousMist";
+
+const GlossyCube = lazy(() => import("./GlossyCube"));
+const LuminousMist = lazy(() => import("./LuminousMist"));
 
 const Hero = () => {
   return (
     <section id="hero" className="relative min-h-[100vh] flex items-center pt-32 bg-[#050505] overflow-hidden">
       {/* Cinematic Luminous Mist Background */}
-      <LuminousMist />
+      <Suspense fallback={null}>
+        <LuminousMist />
+      </Suspense>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-0">
@@ -76,7 +79,9 @@ const Hero = () => {
           <div className="w-full lg:w-5/12 h-[500px] md:h-[600px] relative pointer-events-none">
             {/* <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-20 pointer-events-none h-20 bottom-0"></div> */}
             <div className="w-full h-full scale-95 md:scale-110">
-              <GlossyCube />
+              <Suspense fallback={<div className="w-full h-full bg-primary/5 rounded-3xl animate-pulse" />}>
+                <GlossyCube />
+              </Suspense>
             </div>
           </div>
 
