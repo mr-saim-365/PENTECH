@@ -83,7 +83,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-10">
+        <nav className="hidden lg:flex items-center space-x-6 xl:space-x-10">
           {navLinks.map((link) => (
             link.type === "link" ? (
               <Link
@@ -108,8 +108,8 @@ const Navbar = () => {
         </nav>
 
         {/* Social Icons & CTA */}
-        <div className="hidden md:flex items-center space-x-6">
-          <div className="flex items-center space-x-4 border-r border-white/10 pr-6">
+        <div className="hidden lg:flex items-center space-x-4 xl:space-x-6">
+          <div className="hidden xl:flex items-center space-x-4 border-r border-white/10 pr-6">
             {socialLinks.map((social, index) => (
               <a
                 key={index}
@@ -130,7 +130,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden relative z-[1001] p-2 text-white"
+          className="lg:hidden relative z-[1001] p-2 text-white"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Menu"
         >
